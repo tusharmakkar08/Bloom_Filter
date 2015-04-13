@@ -11,6 +11,7 @@ class BloomFilter:
     def __init__(self, size, hash_count):
         '''
         Initializing the bloom filter
+        INPUT
         size : size of bitarray
         hash_count : Number of times to run the function
         '''
@@ -20,11 +21,21 @@ class BloomFilter:
         self.bit_array.setall(0)
         
     def add(self, string):
+        '''
+        Adding string to bloom filter
+        INPUT 
+        string : Input string
+        '''
         for seed in xrange(self.hash_count):
             result = mmh3.hash(string, seed) % self.size
             self.bit_array[result] = 1
             
     def lookup(self, string):
+        '''
+        Checking up string from bloom filter
+        INPUT 
+        string : Input string
+        '''
         for seed in xrange(self.hash_count):
             result = mmh3.hash(string, seed) % self.size
             if self.bit_array[result] == 0:
