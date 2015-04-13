@@ -42,6 +42,26 @@ class BloomFilter:
                 return "Nope"
         return "Probably"
 
+def timeCheckLookup(string, bloomFilter, normalList):
+    '''
+    Compares times between normal list and bloom filter
+    INPUT 
+    string : input string
+    bloomFilter : Bloom Filter data structure
+    normalList : Array Data structure
+    '''
+    start = datetime.datetime.now()
+    print bloomFilter.lookup(string)
+    finish = datetime.datetime.now()
+    print "Using bloom filter time is",(finish-start).microseconds
+    
+    start = datetime.datetime.now()
+    for word in normalList:
+        if word == string:
+            break
+    finish = datetime.datetime.now()
+    print "Using Normal list time is", (finish-start).microseconds
+
 
 if __name__ == "__main__":
     '''
@@ -53,36 +73,7 @@ if __name__ == "__main__":
         for line in f: 
             for word in line.split():
                 bloomFilter.add(word)
-    print bloomFilter.lookup("CHAPTER")
-    
-    #~ 
-#~ start = datetime.datetime.now()
-#~ print bf.lookup("CHAPTER")
-#~ finish = datetime.datetime.now()
-#~ print (finish-start).microseconds
- #~ 
-#~ start = datetime.datetime.now()
-#~ for word in huge:
-    #~ if word == "harry":
-        #~ break
-#~ finish = datetime.datetime.now()
-#~ print (finish-start).microseconds
- #~ 
- #~ 
-#~ print bf.lookup("Max")
-#~ print bf.lookup("mice")
-#~ print bf.lookup("3")
- #~ 
- #~ 
-#~ start = datetime.datetime.now()
-#~ bf.lookup("apple")
-#~ finish = datetime.datetime.now()
-#~ print (finish-start).microseconds
- #~ 
- #~ 
-#~ start = datetime.datetime.now()
-#~ for word in huge:
-    #~ if word == "apple":
-        #~ break
-#~ finish = datetime.datetime.now()
-#~ print (finish-start).microseconds
+                normalList.append(word)
+    timeCheckLookup("CHAPTER", bloomFilter, normalList)
+    timeCheckLookup("CHAPTERRRR", bloomFilter, normalList)
+    timeCheckLookup("lightning", bloomFilter, normalList)
