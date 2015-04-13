@@ -47,41 +47,42 @@ if __name__ == "__main__":
     '''
     Main function where everything is called
     '''
-    bf = BloomFilter(500000, 7)
-    huge = []
- 
-lines = open("harrypotter.txt").read().splitlines()
-for line in lines:
-    bf.add(line)
-    huge.append(line)
+    bloomFilter = BloomFilter(500000, 7)
+    normalList = []
+    with open('harrypotter.txt','r') as f:
+        for line in f: 
+            for word in line.split():
+                bloomFilter.add(word)
+    print bloomFilter.lookup("CHAPTER")
     
-start = datetime.datetime.now()
-print bf.lookup("CHAPTER")
-finish = datetime.datetime.now()
-print (finish-start).microseconds
- 
-start = datetime.datetime.now()
-for word in huge:
-    if word == "harry":
-        break
-finish = datetime.datetime.now()
-print (finish-start).microseconds
- 
- 
-print bf.lookup("Max")
-print bf.lookup("mice")
-print bf.lookup("3")
- 
- 
-start = datetime.datetime.now()
-bf.lookup("apple")
-finish = datetime.datetime.now()
-print (finish-start).microseconds
- 
- 
-start = datetime.datetime.now()
-for word in huge:
-    if word == "apple":
-        break
-finish = datetime.datetime.now()
-print (finish-start).microseconds
+    #~ 
+#~ start = datetime.datetime.now()
+#~ print bf.lookup("CHAPTER")
+#~ finish = datetime.datetime.now()
+#~ print (finish-start).microseconds
+ #~ 
+#~ start = datetime.datetime.now()
+#~ for word in huge:
+    #~ if word == "harry":
+        #~ break
+#~ finish = datetime.datetime.now()
+#~ print (finish-start).microseconds
+ #~ 
+ #~ 
+#~ print bf.lookup("Max")
+#~ print bf.lookup("mice")
+#~ print bf.lookup("3")
+ #~ 
+ #~ 
+#~ start = datetime.datetime.now()
+#~ bf.lookup("apple")
+#~ finish = datetime.datetime.now()
+#~ print (finish-start).microseconds
+ #~ 
+ #~ 
+#~ start = datetime.datetime.now()
+#~ for word in huge:
+    #~ if word == "apple":
+        #~ break
+#~ finish = datetime.datetime.now()
+#~ print (finish-start).microseconds
