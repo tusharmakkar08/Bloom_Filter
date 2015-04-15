@@ -50,6 +50,7 @@ def timeCheckLookup(string, bloomFilter, normalList):
     bloomFilter : Bloom Filter data structure
     normalList : Array Data structure
     '''
+    print "The word which we are searching for is ", string
     start = datetime.datetime.now()
     print bloomFilter.lookup(string)
     finish = datetime.datetime.now()
